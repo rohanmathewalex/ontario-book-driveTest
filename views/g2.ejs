@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('/assets/img/g2-bg.jpeg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>G2 Test</h1>
+                                <span class="subheading">Please enter your information</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Page Content-->
+            <div class="container px-4 px-lg-5">
+                <!-- Content Row-->
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-2 mb-5"></div>
+                    <div class="col-md-8 mb-5">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">Book your G2 Test</h2>
+                                <hr class="my-4">
+                                <% if(typeof(code)=="undefined" ) {%>
+                                    <% let driver={}; if (user !="undefined" ) { driver=user; } const
+                                        appointment=driver.appointmentId || {}; %>
+                                        <form id="g2Form" action="/users/update" method="POST"
+                                            enctype="multipart/form-data">
+                                            <input type="hidden" id="id" name="id" value="<%=loggedIn%>">
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName"
+                                                        name="firstName" value="<%=driver.firstName || ''%>">
+                                                    <p class="err-message"></p>
+                                                </div>
+                                                <div class="col mb-3">
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName"
+                                                        name="lastName" value="<%=driver.lastName || ''%>">
+                                                    <p class="err-message"></p>
+                                                </div>
+                                            </div>
+                                            <%if (!driver.licenseNo) {%>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="licenseNo" class="form-label">License Number</label>
+                                                        <input type="text" class="form-control" id="licenseNo"
+                                                            name="licenseNo" value="<%=driver.licenseNo || ''%>">
+                                                        <p class="err-message"></p>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="dob" class="form-label">Date of Birth</label>
+                                                            <input type="date" class="form-control" id="dob" name="dob"
+                                                                value="<%=driver.dob || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <h5 class="card-title">Address</h5>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="houseNo" class="form-label">House Number</label>
+                                                            <input type="text" class="form-control" id="houseNo"
+                                                                name="houseNo"
+                                                                value="<%=driver.address.houseNo || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div class="col mb-3">
+                                                            <label for="streetName" class="form-label">Street
+                                                                Name</label>
+                                                            <input type="text" class="form-control" id="streetName"
+                                                                name="streetName"
+                                                                value="<%=driver.address.streetName || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="postalCode" class="form-label">Postal
+                                                                code</label>
+                                                            <input type="text" class="form-control" id="postalCode"
+                                                                name="postalCode"
+                                                                value="<%=driver.address.postalCode || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div class="col mb-3">
+                                                            <label for="city" class="form-label">City</label>
+                                                            <input type="text" class="form-control" id="city"
+                                                                name="city" value="<%=driver.address.city || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="province" class="form-label">Province</label>
+                                                            <input type="text" class="form-control" id="province"
+                                                                name="province"
+                                                                value="<%=driver.address.province || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div class="col mb-3">
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <h5 class="card-title">Car Info</h5>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="make" class="form-label">Maker</label>
+                                                            <input type="text" class="form-control" id="make"
+                                                                name="make" value="<%=driver.carInfo.make || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div class="col mb-3">
+                                                            <label for="model" class="form-label">Model</label>
+                                                            <input type="text" class="form-control" id="model"
+                                                                name="model" value="<%=driver.carInfo.model || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="year" class="form-label">Year of car
+                                                                made</label>
+                                                            <input type="text" class="form-control" id="year"
+                                                                name="year" value="<%=driver.carInfo.year || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div class="col mb-3">
+                                                            <label for="plateNo" class="form-label">Plate number</label>
+                                                            <input type="text" class="form-control" id="plateNo"
+                                                                name="plateNo"
+                                                                value="<%=driver.carInfo.plateNo || ''%>">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <h5 class="card-title">Appointment time</h5>
+                                                    <div class="row">
+                                                        <input type="hidden" id="adg2"
+                                                            value="<%=appointment.date || ''%>">
+                                                        <input type="hidden" id="atg2"
+                                                            value="<%=appointment.time || ''%>">
+                                                        <input type="hidden" id="ssid" name="ssid"
+                                                            value="<%=appointment._id || ''%>">
+                                                        <div class="mb-3 center-box center-box-v">
+                                                            <input type="date" class="form-control"
+                                                                id="appointmentDateG2"
+                                                                value="<%=appointment.date || ''%>" style="width:200px">
+                                                            <p class="err-message"></p>
+                                                            <input type="hidden" id="selectedSlotId"
+                                                                name="selectedSlotId">
+                                                            <p class="err-message"></p>
+                                                        </div>
+                                                        <div id="availableSlots" class="mb-3 center-box">
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <div class="mb-3" style="display:flex;justify-content:center;">
+                                                        <input type="hidden" id="path" name="path" value="g2">
+                                                        <button type="submit"
+                                                            class="btn btn-primary align-bottom me-2">Submit</button>
+                                                        <a class="btn btn-secondary align-bottom ms-2"
+                                                            href="/driver">Cancel</a>
+                                                    </div>
+                                        </form>
+                                        <% } else if(code===200) { %>
+                                            <div class="col mb-3 echo">
+                                                <p>Submission Success</p>
+                                                <a class="btn btn-primary align-bottom" href="/">Back to Home</a>
+                                            </div>
+                                            <% } else if(code===500) { %>
+                                                <div class="col mb-3 echo">
+                                                    <p>Submission failed:</p><br>
+                                                    <p>
+                                                        <%= message %>
+                                                    </p>
+                                                </div>
+                                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-5"></div>
+                </div>
+            </div>
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>

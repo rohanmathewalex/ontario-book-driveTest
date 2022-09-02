@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('/assets/img/appointment-bg.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="site-heading">
+                                <h1>Appointment</h1>
+                                <span class="subheading">Add appointment slots</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Page Content-->
+            <div class="container px-4 px-lg-5">
+                <% if(typeof(code)=="undefined" ) {%>
+                    <div class="row gx-4 gx-lg-5">
+                        <div class="col-md-2 mb-5"></div>
+                        <div class="col-md-8 mb-5">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h2 class="card-title mb-4">Select time slots</h2>
+                                    <form id="appointmentForm" action="/admin/timeslot/save" method="POST">
+                                        <div class="mb-3 center-box center-box-v">
+                                            <input type="date" class="form-control" id="appointmentDate"
+                                                name="appointmentDate" style="width:200px">
+                                            <p class="err-message"></p>
+                                            <input type="hidden" id="selectedSlots" name="selectedSlots">
+                                            <p class="err-message"></p>
+                                        </div>
+                                        <div id="slotContainer" class="mb-3 center-box">
+                                        </div>
+                                        <hr>
+                                        <div class="mb-3 center-box">
+                                            <button type="submit"
+                                                class="btn btn-primary align-bottom me-2">Submit</button>
+                                            <a class="btn btn-secondary align-bottom ms-2"
+                                                href="/appointment">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-5"></div>
+                    </div>
+                    <% } else if(code===200) { %>
+                        <div class="col mb-3 echo">
+                            <p>Submission Success</p>
+                            <a class="btn btn-primary align-bottom" href="/appointment">Go Back</a>
+                        </div>
+                        <% } else if(code===500) { %>
+                            <div class="col mb-3 echo">
+                                <p>Submission failed:</p><br>
+                                <p>
+                                    <%= message %>
+                                </p>
+                            </div>
+                            <% } %>
+            </div>
+            <!-- Footer-->
+            <%- include('layouts/footer'); -%>
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>
